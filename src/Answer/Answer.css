@@ -1,0 +1,12 @@
+.answer {
+    border: 1px solid black;
+    display: block;
+    padding: 1em 2.3em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.answer:hover {
+    background: lightgreen;
+    transition: .3s;
+    border: none;
+}

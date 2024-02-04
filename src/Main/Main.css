@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+.checkBtn {
+    margin: 2em;
+    border: none;
+    padding: 1em 2.5em;
+    border-radius: 10px;
+    background: violet;
+    font-size: medium;
+    cursor: pointer;
+}
