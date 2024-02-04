@@ -7,8 +7,9 @@ export default function Main() {
     const [quizData, setQuizData] = useState([])
     const [message, setMessage] = useState("")
     const [isChecked, setIsChecked] = useState(false)
+    const [isStarted, setIsStarted] = useState(false)
     useEffect(() => {
-        fetch("https://opentdb.com/api.php?amount=10&type=multiple")
+        fetch("https://opentdb.com/api.php?amount=6&type=multiple")
         .then(res => res.json())
         .then(data => setQuizData(data.results.map(q => ({
             ...q,
@@ -59,17 +60,35 @@ export default function Main() {
             setMessage("Please answer all the questions")
         }
     }
+
+    const restart = () => {
+        setIsChecked(false)
+        setMessage("")
+        setQuizData(prevQuizData => prevQuizData.map(q => ({
+            ...q,
+            answers: q.answers.map(a => ({
+                ...a,
+                isSelected: false
+            }))
+        })))
+    }
     
     return (
         <div className="main">
             <h1>Quizz App</h1>
-            <div className="container">
+            {isStarted 
+            ? <div className="container">
                 <div className="questions">
                     {questions}
                 </div>
-                <button onClick={checkAns} className="checkBtn">CHECK ANSWERS</button>
-                {message}
-            </div>
+                {!isChecked ? <button onClick={checkAns} className="checkBtn">CHECK ANSWERS</button> :
+                <button onClick={restart} className="checkBtn">TRY AGAIN?</button>}
+                <p>{message}</p>
+            </div> 
+            : <div>
+                <p>"Do you wanna play a Quizz game?"</p>
+                <button onClick={() => setIsStarted(true)}>START</button>
+                </div>}
         </div>
     )
 }

@@ -11,3 +11,8 @@
     font-size: medium;
     cursor: pointer;
 }
+
+.startGameBtn {
+    border: none;
+    color: red;
+}
